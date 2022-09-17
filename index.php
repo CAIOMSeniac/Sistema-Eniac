@@ -1,3 +1,17 @@
+<?php
+
+    if(isset($_POST['submit']))
+    {
+        include_once('conexao_Banco.php');
+        $nome = $_POST['nome'];
+        $senha = $_POST['senha'];
+        $email = $_POST['email'];
+
+        $result = mysqli_query($conexao, "INSERT INTO `usuarios`(`codigo`, `nome`, `email`, `senha`, `funcao`, `ativo`) VALUES
+        VALUES (15, '$nome', '$email@e.com', '$senha', 'Adm', 1)");
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,21 +27,21 @@
 </head>
 <body>
     <section class="container">
-
-        <h1>Cadastro</h1>
+       <form action="index.php" method="POST">
+        <h1>CADASTRAR USUARIO NOVO</h1>
         <div class="input-group">
         <div class="input-group-text" id="nomerequerido">requirido</div>
-        <input type="text" class="form-control" placeholder="nome" id="usuarionome" >
+        <input name = 'nome' type="text" class="form-control" placeholder="nome" id="usuarionome" >
         </div>
         <br>
         <div class="input-group">
         <div class="input-group-text" id="senharequeriada">requirido</div>
-        <input type="text"  class="form-control" placeholder="senha" id="usuariosenha">
+        <input name= 'senha' type="text"  class="form-control" placeholder="senha" id="usuariosenha">
         </div>
         <br>
-        <input type="button" class="btn btn-primary"  value="validar" id="confirmar">
+        <input type="submit" class="btn btn-primary"  value="validar" id="confirmar">
         <br>
-        <h2 id="alerta"></h2>
+        </form>
     </section>
 </body>
 </html>
