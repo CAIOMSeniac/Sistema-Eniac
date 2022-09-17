@@ -17,8 +17,8 @@
             if($row == 1) {
                 $linha=mysqli_fetch_assoc($result);
                 $_SESSION['usuario'] = $usuario;
-                echo "<script>alert(".$linha["funcao"].")</script>";
                 $_SESSION['cargo'] = $linha["funcao"];
+                header('Location:dashboard.php');
             } else {
                 $_SESSION['nao_autenticado'] = true;
                 $login_conf=false;

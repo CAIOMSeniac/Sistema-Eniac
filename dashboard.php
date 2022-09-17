@@ -1,3 +1,9 @@
+
+<?php
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,10 +19,20 @@
     <title>Projeto</title>
 </head>
 <body>
+    <br>
     <?php
-
-    echo "<h1>".$_SESSION['cargo']."</h1>"
-    
+    echo "<h1>".$_SESSION['cargo']."</h1>";
+    if($_SESSION['cargo'] == "Adm"){
+        echo "<a href='#' target='_blank'>Ativa usuario</a>";
+        echo "<br>";
+        echo "<a href='#' target='_blank'>Alterar usuarios</a>";
+    }
     ?>
+    <br>
+    <a href='#' target='_blank'>curriculos</a>
+    <br>
+    <a href='#' target='_blank'>imagens</a>
+    <br>
+    <a href='logout.php'>logout</a>
 </body>
 </html>
