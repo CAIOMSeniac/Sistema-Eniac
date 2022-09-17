@@ -3,6 +3,6 @@ $servidor = 'localhost';
 $usuario = 'root';
 $senha = '';
 $banco = 'colegio';
-$mysqli = new mysqli($servidor, $usuario, $senha, $banco);
+$conn = new mysqli($servidor, $usuario, $senha, $banco);
 if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
 ?>
