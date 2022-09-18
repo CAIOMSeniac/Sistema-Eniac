@@ -15,16 +15,10 @@ if(isset($_POST['buscar'])){
     if (isset($_POST['USER'])) {
         $cond .= 'AND `funcao` = "User" ';
     }
-    if (isset($_POST['buscaNome'])) {
+    if (isset($_POST['buscaNome']) && strlen($_POST['buscaNome']) > 0) {
         $nome = mysqli_real_escape_string($conn,$_POST['buscaNome']);
         $cond .= 'AND `nome` LIKE "%'.$nome.'%" ';
     }
-    if(isset($_POST['Alterar_valor'])){
-        echo '<h1>aaaaaa</h1>';
-        if (isset($_POST['model-cargo'])) {
-        }
-         echo '<h1>aaaaaa</h1>';
-        }
 };
 ?>
 <!DOCTYPE html>
@@ -43,7 +37,8 @@ if(isset($_POST['buscar'])){
 </head>
 <body>
 <br>
-<form action="usuarios.php" method="POST">
+<!--CONDIÇÕES DE BUSCA/ FILTROS-->
+<form method="POST">
 <div class="input-group mb-3">
  <span class="input-group-text" id="basic-addon1">
     <input name='ATIVOS' type="checkbox" class="btn-check" id="btn-check"  autocomplete="off">
@@ -154,7 +149,7 @@ CRIAR NOVO USUARIO
           <label for="recipient-name" class="col-form-label">Senha:</label>
             <input type="text" name="model-senha" class="form-control" id="model-senha">
           </div>
-            <input type="text" name="model-cod" class="form-control" id="model-cod">
+            <input type="hidden" name="model-cod" class="form-control" id="model-cod">
       </div>
       <div class="modal-footer">
         <button  id="Alterar_valor" name='Alterar_valor' type="submit" class="btn btn-primary">confirmar</button>
@@ -225,7 +220,7 @@ CRIAR NOVO USUARIO
 
 
         <form action="usuariosDel.php" method="POST">
-            <input type="text" name="model-cod-u" class="form-control" id="model-cod-u">
+            <input type="hidden" name="model-cod-u" class="form-control" id="model-cod-u">
       </div>
       <div class="modal-footer">
         <button  id="DEL_USER" name='DEL_USER' type="submit" class="btn btn-primary">confirmar</button>

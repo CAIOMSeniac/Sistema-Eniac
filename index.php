@@ -43,7 +43,7 @@
 <body>
     <section class="container">
        <form action="index.php" method="POST">
-        <h1>CADASTRAR USUARIO NOVO</h1>
+        <h1>Login</h1>
         <div class="input-group">
         <div class="input-group-text" id="nomerequerido">requirido</div>
         <input name = 'nome' type="text" class="form-control" placeholder="nome ou email" id="usuarionome" >

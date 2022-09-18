@@ -29,7 +29,7 @@ include_once('conexao_Banco.php');
     <br>
     <a href='#' target='_blank'>curriculos</a>
     <br>
-    <a href='#' target='_blank'>imagens</a>
+    <a href='imagens.php' target='_blank'>imagens</a>
     <br>
     <a href='logout.php'>logout</a>
 </body>
