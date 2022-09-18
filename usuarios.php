@@ -15,6 +15,13 @@ if(isset($_POST['buscar'])){
     if (isset($_POST['USER'])) {
         $cond .= 'AND `funcao` = "User" ';
     }
+    if (isset($_POST['buscaNome'])) {
+        echo "<script>alert('a')</script>";
+        $nome = mysqli_real_escape_string($conn,$_POST['buscaNome']);
+        $cond .= 'AND `nome` LIKE "%'.$nome.'%" ';
+    }else{
+        echo'<h1>cafe</h1>';
+    }
 };
 ?>
 <!DOCTYPE html>
@@ -48,7 +55,7 @@ if(isset($_POST['buscar'])){
     <input name="USER" type="checkbox" class="btn-check" id="btn-check-4"  autocomplete="off">
     <label class="btn btn-primary" for="btn-check-4">USUARIOS</label>
 </span><span class="input-group-text" id="basic-addon1">Busca</span>
-<input type="text" id="buscaNome"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
+<input type="text" name="buscaNome"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
 <span class="input-group-text" id="basic-addon1">
     <button name = 'buscar' class="btn btn-outline-secondary" type="submit">FILTRAR</button>
 </span>
