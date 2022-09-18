@@ -16,11 +16,8 @@ if(isset($_POST['buscar'])){
         $cond .= 'AND `funcao` = "User" ';
     }
     if (isset($_POST['buscaNome'])) {
-        echo "<script>alert('a')</script>";
         $nome = mysqli_real_escape_string($conn,$_POST['buscaNome']);
         $cond .= 'AND `nome` LIKE "%'.$nome.'%" ';
-    }else{
-        echo'<h1>cafe</h1>';
     }
 };
 ?>
@@ -94,16 +91,18 @@ if(isset($_POST['buscar'])){
             echo "<td>".$linha["senha"]."</td>";
             echo "<td>".$linha["funcao"]."</td>";
             echo "<td>".$linha["ativo"]."</td>";
-            echo '<td><div class="dropdown">
+            echo '<td>
+            <div class="dropdown">
             <div class="btn-group">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Small button
+              opções
             </button>
             <ul class="dropdown-menu">
-            <li class="dropdown-item">teste</li>
-            <li class="dropdown-item"></li>
-            <li><hr class="dropdown-divider"></li>
-            <li class="dropdown-item"></li>
+          </li>
+            <li class="dropdown-item">apagar</li>
+            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#alterarValoresUser" NOMEUSER="'.$linha["nome"].'" SENHAUSER="'.$linha["senha"].'" EMAILUSER="'.$linha["email"].'" CARGOUSER="'.$linha["funcao"].'">ALTERAR</button></li>
+            <li class="dropdown-item">ativar</li>
+            <li class="dropdown-item">desativar</li>
             </ul>
           </div>
           </td>';
@@ -113,7 +112,71 @@ if(isset($_POST['buscar'])){
     ?>
   </tbody>
  </table>
-</body>
+ <div class="modal fade" id="alterarValoresUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ALTERANDO VALOR DE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+        <div class="form-check form-switch">
+        <input id="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <label  class="form-check-label" for="flexSwitchCheckDefault">ADMINISTRADOR</label>
+        </div>
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label"> Nome:</label>
+            <input type="text"name="model-nome" class="form-control" id="model-nome">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="model-email" class="form-control" id="model-email">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Senha:</label>
+            <input type="model-senha" class="form-control" id="model-senha">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button name='Alterar valor'type="submit" class="btn btn-primary">confirmar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+const exampleModal = document.getElementById('alterarValoresUser')
+exampleModal.addEventListener('show.bs.modal', event => {
+
+  const button = event.relatedTarget
+
+
+  const nome = button.getAttribute('NOMEUSER')
+  const senha = button.getAttribute('SENHAUSER')
+  const email = button.getAttribute('EMAILUSER')
+  const cargo = button.getAttribute('CARGOUSER')
+
+
+  const modalTitle = exampleModal.querySelector('.modal-title')
+  const modalNome = exampleModal.querySelector('#model-nome')
+  const modalSenha = exampleModal.querySelector('#model-email')
+  const modalEmail = exampleModal.querySelector('#model-senha')
+  const modalCargo = exampleModal.querySelector('#model-cargo')
+
+  modalTitle.textContent = `ALTERANDO VALORES DE ${nome}`
+  modalNome.value = nome
+  modalSenha.value = senha
+  modalEmail.value = email
+  if (cargo == "Adm") {
+    modalCargo.checked = true;
+} else {
+    modalCargo.checked = false;
+}
+});
+</script>
