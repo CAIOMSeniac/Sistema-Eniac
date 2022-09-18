@@ -1,7 +1,7 @@
-
 <?php
 
 session_start();
+include_once('conexao_Banco.php');
 
 ?>
 <!DOCTYPE html>
@@ -23,9 +23,7 @@ session_start();
     <?php
     echo "<h1>".$_SESSION['cargo']."</h1>";
     if($_SESSION['cargo'] == "Adm"){
-        echo "<a href='#' target='_blank'>Ativa usuario</a>";
-        echo "<br>";
-        echo "<a href='#' target='_blank'>Alterar usuarios</a>";
+        echo "<a href='usuarios.php' target='_blank'>Alterar usuarios</a>";
     }
     ?>
     <br>
