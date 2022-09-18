@@ -19,6 +19,12 @@ if(isset($_POST['buscar'])){
         $nome = mysqli_real_escape_string($conn,$_POST['buscaNome']);
         $cond .= 'AND `nome` LIKE "%'.$nome.'%" ';
     }
+    if(isset($_POST['Alterar_valor'])){
+        echo '<h1>aaaaaa</h1>';
+        if (isset($_POST['model-cargo'])) {
+        }
+         echo '<h1>aaaaaa</h1>';
+        }
 };
 ?>
 <!DOCTYPE html>
@@ -74,8 +80,6 @@ if(isset($_POST['buscar'])){
     <?php
     ListarUsuarios($cond);
     function ListarUsuarios($condicao){
-        ob_start();
-        ob_end_clean();
         $servidor = 'localhost';
         $usuario = 'root';
         $senha = '';
@@ -98,11 +102,10 @@ if(isset($_POST['buscar'])){
               opções
             </button>
             <ul class="dropdown-menu">
-          </li>
-            <li class="dropdown-item">apagar</li>
-            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#alterarValoresUser" NOMEUSER="'.$linha["nome"].'" SENHAUSER="'.$linha["senha"].'" EMAILUSER="'.$linha["email"].'" CARGOUSER="'.$linha["funcao"].'">ALTERAR</button></li>
-            <li class="dropdown-item">ativar</li>
-            <li class="dropdown-item">desativar</li>
+            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeletaUser" NOMEUSER="'.$linha["nome"].'" CODUSER="'.$linha["codigo"].'">
+            DELETAR</button></li></li>
+            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#alterarValoresUser" NOMEUSER="'.$linha["nome"].'" SENHAUSER="'.$linha["senha"].'" EMAILUSER="'.$linha["email"].'" CARGOUSER="'.$linha["funcao"].'" ATIVOUSER="'.$linha["ativo"].'" CODUSER="'.$linha["codigo"].'">
+              ALTERAR</button></li>
             </ul>
           </div>
           </td>';
@@ -112,6 +115,12 @@ if(isset($_POST['buscar'])){
     ?>
   </tbody>
  </table>
+ <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaUser">
+CRIAR NOVO USUARIO
+</button>
+
+
+
  <div class="modal fade" id="alterarValoresUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -120,34 +129,111 @@ if(isset($_POST['buscar'])){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+
+
+        <form action="usuariosatt.php" method="POST">
 
         <div class="form-check form-switch">
-        <input id="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <input id="model-cargo" name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label  class="form-check-label" for="flexSwitchCheckDefault">ADMINISTRADOR</label>
+        </div>
+        <div class="form-check form-switch">
+        <input id="model-ativo" name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <label  class="form-check-label" for="flexSwitchCheckDefault">ATIVADO</label>
         </div>
 
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label"> Nome:</label>
-            <input type="text"name="model-nome" class="form-control" id="model-nome">
+            <input type="text" name="model-nome" class="form-control" id="model-nome">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">Email:</label>
-            <input type="model-email" class="form-control" id="model-email">
+            <input type="text" name="model-email" class="form-control" id="model-email">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">Senha:</label>
-            <input type="model-senha" class="form-control" id="model-senha">
+            <input type="text" name="model-senha" class="form-control" id="model-senha">
           </div>
+            <input type="text" name="model-cod" class="form-control" id="model-cod">
       </div>
       <div class="modal-footer">
-        <button name='Alterar valor'type="submit" class="btn btn-primary">confirmar</button>
+        <button  id="Alterar_valor" name='Alterar_valor' type="submit" class="btn btn-primary">confirmar</button>
       </div>
       </form>
     </div>
   </div>
 </div>
 
+
+
+
+<div class="modal fade" id="CriaUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ALTERANDO VALOR DE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form action="usuarioNovo.php" method="POST">
+
+        <div class="form-check form-switch">
+        <input id="model-cargo" name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <label  class="form-check-label" for="flexSwitchCheckDefault">ADMINISTRADOR</label>
+        </div>
+        <div class="form-check form-switch">
+        <input id="model-ativo" name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <label  class="form-check-label" for="flexSwitchCheckDefault">ATIVADO</label>
+        </div>
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label"> Nome:</label>
+            <input type="text" name="model-nome" class="form-control" id="model-nome">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="text" name="model-email" class="form-control" id="model-email">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Senha:</label>
+            <input type="text" name="model-senha" class="form-control" id="model-senha">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button  id="CriarUser" name='CriarUser' type="submit" class="btn btn-primary">confirmar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="DeletaUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DELETANDO USUARIO: </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form action="usuariosDel.php" method="POST">
+            <input type="text" name="model-cod-u" class="form-control" id="model-cod-u">
+      </div>
+      <div class="modal-footer">
+        <button  id="DEL_USER" name='DEL_USER' type="submit" class="btn btn-primary">confirmar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -161,6 +247,8 @@ exampleModal.addEventListener('show.bs.modal', event => {
   const senha = button.getAttribute('SENHAUSER')
   const email = button.getAttribute('EMAILUSER')
   const cargo = button.getAttribute('CARGOUSER')
+  const ativo = button.getAttribute('ATIVOUSER')
+  const cod = button.getAttribute('CODUSER')
 
 
   const modalTitle = exampleModal.querySelector('.modal-title')
@@ -168,15 +256,39 @@ exampleModal.addEventListener('show.bs.modal', event => {
   const modalSenha = exampleModal.querySelector('#model-email')
   const modalEmail = exampleModal.querySelector('#model-senha')
   const modalCargo = exampleModal.querySelector('#model-cargo')
+  const modalAtivo = exampleModal.querySelector('#model-ativo')
+  const modalCod = exampleModal.querySelector('#model-cod')
 
   modalTitle.textContent = `ALTERANDO VALORES DE ${nome}`
   modalNome.value = nome
   modalSenha.value = senha
   modalEmail.value = email
+  modalCod.value = cod
   if (cargo == "Adm") {
     modalCargo.checked = true;
 } else {
     modalCargo.checked = false;
 }
+if (ativo == 1) {
+    modalAtivo.checked = true;
+} else {
+    modalAtivo.checked = false;
+}
+});
+const DelModal = document.getElementById('DeletaUser')
+DelModal.addEventListener('show.bs.modal', event => {
+
+  const button = event.relatedTarget
+
+
+  const nome = button.getAttribute('NOMEUSER')
+  const cod = button.getAttribute('CODUSER')
+
+
+  const modalTitle = DelModal.querySelector('.modal-title')
+  const modalCod = DelModal.querySelector('#model-cod-u')
+
+  modalTitle.textContent = `DELETANDO USUARIO: ${nome}`
+  modalCod.value = cod
 });
 </script>
