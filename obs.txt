@@ -1,0 +1,15 @@
+baixar git https://git-scm.com/downloads
+GIT BASH HERE
+** clonar repository substituir URL pelo link mesmo
+
+git clone URL
+
+
+*** configurar no vscode      terminal git bash 
+** colocar o email entre aspas
+
+git config --global user.email ""
+
+** colocar o nome entre aspas
+
+git config --global user.name ""
