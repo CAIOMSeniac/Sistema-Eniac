@@ -5,7 +5,7 @@ GIT BASH HERE
 git clone URL
 
 
-*** configurar no vscode      terminal git bash 
+*** configurar no vscode      terminal git bash
 ** colocar o email entre aspas
 
 git config --global user.email ""

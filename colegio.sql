@@ -37,7 +37,7 @@ CREATE TABLE `tabela_imagens` (
   `imagem` longblob NOT NULL,
   `cod_curriculo` int(11) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 
 --
 -- Extraindo dados da tabela `tabela_imagens`
@@ -54,7 +54,7 @@ CREATE TABLE `usuarios` (
   `senha` varchar(20) DEFAULT NULL,
   `funcao` varchar(25) DEFAULT NULL,
   `ativo` tinyint(1) DEFAULT NULL,
-PRIMARY KEY (`nome`)); ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+PRIMARY KEY (`codigo`));
 
 --
 -- Extraindo dados da tabela `usuarios`
