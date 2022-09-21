@@ -69,3 +69,19 @@ INSERT INTO `usuarios` (`codigo`, `nome`, `email`, `senha`, `funcao`, `ativo`) V
 
 
 
+CREATE TABLE `curriculos`(
+    cod_curriculo int PRIMARY KEY AUTO_INCREMENT,
+    endereco varchar(50),
+    telefone varchar(50),
+    email varchar(50),
+    cpf varchar(50),
+    rg varchar(50),
+    cidade varchar(50),
+    uf varchar(50),
+    sexo varchar(50),
+    nome_escola varchar(50),
+    nome_faculdade varchar(50),
+    curso  varchar(50),
+    ano_formacao DATE,
+    empresas TEXT,
+    conhecimentos TEXT);
