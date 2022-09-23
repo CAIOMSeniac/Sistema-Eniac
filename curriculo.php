@@ -14,7 +14,7 @@ if(isset($_POST['buscar'])){
     }
     if (isset($_POST['buscaNome'] ) && strlen($_POST['buscaNome']) > 0) {
         $nome = mysqli_real_escape_string($conn,$_POST['buscaNome']);
-        $cond .= 'AND `evento` LIKE "%'.$nome.'%" ';
+        $cond .= 'AND `nome_Completo` LIKE "%'.$nome.'%" ';
     }}
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,8 @@ if(isset($_POST['buscar'])){
     <!-- LINKS DO BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <!---->
+    <!--Ajax entre outros-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styleGen.css">
     <link rel="icon" type="imagem/png" href="https://portalacademico.eniac.edu.br/pluginfile.php/1/theme_snap/favicon/1663305488/favicon-32.png" />
     <meta charset="UTF-8">
@@ -55,14 +56,68 @@ ENTRE
 <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#Curriculo' NOMEImg='' CODImg=''>
 Mostrar curriculo</button>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
-CRIAR NOVO CURRICULO
-</button>
-
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AlterarCurriculo">
 ALTERA CURRICULO
 </button>
 
+<table class="table table-striped">
+    <caption>lista de curriculos</caption>
+   <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Visualizar</th>
+      <th scope="col">Alterar Curriculo</th>
+      <th scope="col">Deletar Curriculo</th>
+      <th scope="col">Codigo Curriculo</th>
+
+    </tr>
+   </thead>
+   <tbody>
+
+    <?php
+    ListarUsuarios($cond);
+    function ListarUsuarios($condicao){
+        $servidor = 'localhost';
+        $usuario = 'root';
+        $senha = '';
+        $banco = 'colegio';
+        $conn = new mysqli($servidor, $usuario, $senha, $banco);
+        if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
+        $querySql = "SELECT * FROM  `curriculos_pessoa` WHERE ".$condicao."";
+        $res = mysqli_query($conn,$querySql);
+        while($linha=mysqli_fetch_assoc($res)){
+            echo "<tr>";
+            echo "<td>".$linha["nome_Completo"]."</td>";
+            echo "<td>
+            <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#Curriculo' 
+            NOME='".$linha["nome_Completo"]."' DATANASC='".$linha["data_nasc"]."' ENDERECO='".$linha["endereco"]."' 
+            CIDADE='".$linha["cidade"]."' EMAIL='".$linha["email"]."' TELL='".$linha["telefone"]."' 
+            CODCURR ='".$linha["cod_curriculo"]."' onclick='carregaImg(".$linha["cod_curriculo"].")'>
+            Mostrar curriculo
+            </button>
+            </td>";
+            echo "<td>
+            <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#AtualizaCurriculo' 
+            CODCURR ='".$linha["cod_curriculo"]."'>
+            Atualizar curriculo
+            </button>
+            </td>";
+            echo "<td>
+            <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#Curriculo' 
+            CODCURR ='".$linha["cod_curriculo"]."'>
+            Deletar curriculo
+            </button>
+            </td>";
+            echo "<td>".$linha["cod_curriculo"]."</td>";
+            echo "</tr>";
+        }
+    }
+    ?>
+  </tbody>
+ </table>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
+CRIAR NOVO CURRICULO
+</button>
 
 
 
@@ -78,16 +133,29 @@ ALTERA CURRICULO
       <div class="modal-body">
         <div class="container text-center">
           <div class="row">
-            <div class="col-sm-5 btn btn-primary">
-             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtZlG8lEIv_ncm1eNFBgteuj7-kFqcoVMjrw&usqp=CAU" class="figure-img img-fluid rounded">
+            <div class="col-sm-5">
+             <?php
+              function imagemCurriculo($cod_cur){
+                $servidor = 'localhost';
+                $usuario = 'root';
+                $senha = '';
+                $banco = 'colegio';
+                $conn = new mysqli($servidor, $usuario, $senha, $banco);
+                $querySql = "SELECT * FROM  `tabela_imagens` WHERE `cod_curriculo` = ".$cod_cur."";
+                $res = mysqli_query($conn,$querySql);
+                while($linha=mysqli_fetch_assoc($res)){
+                  echo "<embed src='data:".$linha['tipo_imagem'].";base64,".base64_encode($linha['imagem'])."' class='figure-img img-fluid rounded'/>";
+                }
+              }
+             ?>
             </div>
-            <div class="col-sm-7 btn btn-primary">
-              <h5>NOME COMPLETO</h5>
+            <div class="col-sm-7">
+              <h5 class="nomeComp">NOME COMPLETO</h5>
               <hr>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
+              <h6 class="data_nasc">data de nascimento</h6>
+              <h6 class="endereco">endereco</h6>
+              <h6 class="tell">tel</h6>
+              <h6 class="email">email</h6>
             </div>
           </div>
           <div class="row">
@@ -131,7 +199,7 @@ ALTERA CURRICULO
       <div class="modal-body">
 
 
-        <form action="" method="POST">
+        <form action="curriculoNovo.php" method="POST">
 
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label"> NOME COMPLETO:</label>
@@ -147,11 +215,11 @@ ALTERA CURRICULO
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">UF:</label>
-            <input type="text" name="model-CPF" class="form-control" id="model-CPF">
+            <input type="text" name="model-UF" class="form-control" id="model-UF">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">DATA NASCIMENTO:</label>
-            <input type="date" name="model-NASC" class="form-control" id="model-DATA_NASC">
+            <input type="date" name="model-DATA_NASC" class="form-control" id="model-DATA_NASC">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">CIDADE:</label>
@@ -159,7 +227,7 @@ ALTERA CURRICULO
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">ENDEREÇO:</label>
-            <input type="text" name="model-CIDADE" class="form-control" id="model-CIDADE" placeholder="RUA, 123 ">
+            <input type="text" name="model-ENDERECO" class="form-control" id="model-ENDERECO" placeholder="RUA, 123 ">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">EMAIL:</label>
@@ -171,7 +239,7 @@ ALTERA CURRICULO
           </div>
       </div>
       <div class="modal-footer">
-        <button  id="CriaImg" name='CriaImg' type="submit" class="btn btn-primary">confirmar</button>
+        <button  id="CriaCurr" name='CriaCurr' type="submit" class="btn btn-primary">confirmar</button>
       </div>
       </form>
     </div>
@@ -182,6 +250,71 @@ ALTERA CURRICULO
 
 
 
+<div class="modal fade" id="AtualizaCurriculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CURRICULO DE:  </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
+      Novo conhecimento/escolaridade
+      </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
+      Nova experiencia
+      </button>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+
+
+
+
 
 </body>
 </html>
+
+
+
+<script type="text/javascript">
+const CurriculoModal = document.getElementById('Curriculo')
+CurriculoModal.addEventListener('show.bs.modal', event => {
+
+  const button = event.relatedTarget;
+
+
+  const nome = button.getAttribute('NOME');
+  const data_nasc = button.getAttribute('DATANASC');
+  const endereco = button.getAttribute('ENDERECO');
+  const cidade = button.getAttribute('CIDADE');
+  const email = button.getAttribute('EMAIL');
+  const tell = button.getAttribute('TELL');
+
+
+
+  //const modalCod = CurriculoModal.querySelector('#model-cod-u')
+  const modalTitle = CurriculoModal.querySelector('.modal-title');
+  const modalnomec = CurriculoModal.querySelector('.nomeComp');
+  const modaldatanasc = CurriculoModal.querySelector('.data_nasc');
+  const modalendereco = CurriculoModal.querySelector('.endereco');
+  const modaltelef = CurriculoModal.querySelector('.tell');
+  const modalemail = CurriculoModal.querySelector('.email');
+
+  modalTitle.textContent = `Curriculo de: ${nome}`;
+  modalnomec.textContent = `${nome}`;
+  modaldatanasc.textContent = `data de nascimento: ${data_nasc}`;
+  modalendereco.textContent = `${endereco} cidade ${cidade}`;
+  modaltelef.textContent = `telefone: ${tell}`;
+  modalemail.textContent = `email: ${email}`;
+  //modalCod.value = cod
+});
+
+function carregaImg(cod){
+ 
+}
+</script>

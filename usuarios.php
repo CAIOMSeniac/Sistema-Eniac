@@ -126,33 +126,33 @@ CRIAR NOVO USUARIO
       <div class="modal-body">
 
 
-        <form action="usuariosatt.php" method="POST">
+        <form id="attUserForm" method="POST">
 
         <div class="form-check form-switch">
-        <input id="model-cargo" name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <input value="1" id="model-cargo-a" name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label  class="form-check-label" for="flexSwitchCheckDefault">ADMINISTRADOR</label>
         </div>
         <div class="form-check form-switch">
-        <input id="model-ativo" name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <input value="1" id="model-ativo-a" name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label  class="form-check-label" for="flexSwitchCheckDefault">ATIVADO</label>
         </div>
 
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label"> Nome:</label>
-            <input type="text" name="model-nome" class="form-control" id="model-nome">
+            <input type="text" name="model-nome" class="form-control" id="model-nome-a">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">Email:</label>
-            <input type="text" name="model-email" class="form-control" id="model-email">
+            <input type="text" name="model-email" class="form-control" id="model-email-a">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">Senha:</label>
-            <input type="text" name="model-senha" class="form-control" id="model-senha">
+            <input type="text" name="model-senha" class="form-control" id="model-senha-a">
           </div>
-            <input type="hidden" name="model-cod" class="form-control" id="model-cod">
+            <input type="hidden" name="model-cod" class="form-control" id="model-cod-a">
       </div>
       <div class="modal-footer">
-        <button  id="Alterar_valor" name='Alterar_valor' type="submit" class="btn btn-primary">confirmar</button>
+        <button  id="Alterar_valor" name='Alterar_valor' type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
       </div>
       </form>
     </div>
@@ -172,32 +172,32 @@ CRIAR NOVO USUARIO
       <div class="modal-body">
 
 
-        <form action="usuarioNovo.php" method="POST">
+        <form id='criaUserForm' method="POST">
 
         <div class="form-check form-switch">
-        <input id="model-cargo" name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <input id="model-cargo-c" value="1" name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label  class="form-check-label" for="flexSwitchCheckDefault">ADMINISTRADOR</label>
         </div>
         <div class="form-check form-switch">
-        <input id="model-ativo" name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <input id="model-ativo-c" value="1" name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label  class="form-check-label" for="flexSwitchCheckDefault">ATIVADO</label>
         </div>
 
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label"> Nome:</label>
-            <input type="text" name="model-nome" class="form-control" id="model-nome">
+            <input type="text" name="model-nome" class="form-control" id="model-nome-c">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">Email:</label>
-            <input type="text" name="model-email" class="form-control" id="model-email">
+            <input type="text" name="model-email" class="form-control" id="model-email-c">
           </div>
           <div class="mb-3">
           <label for="recipient-name" class="col-form-label">Senha:</label>
-            <input type="text" name="model-senha" class="form-control" id="model-senha">
+            <input type="text" name="model-senha" class="form-control" id="model-senha-c">
           </div>
       </div>
       <div class="modal-footer">
-        <button  id="CriarUser" name='CriarUser' type="submit" class="btn btn-primary">confirmar</button>
+        <button  id="CriarUser" name='CriarUser' type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
       </div>
       </form>
     </div>
@@ -219,11 +219,11 @@ CRIAR NOVO USUARIO
       <div class="modal-body">
 
 
-        <form action="usuariosDel.php" method="POST">
+        <form id="deletaUserForm" method="POST">
             <input type="hidden" name="model-cod-u" class="form-control" id="model-cod-u">
       </div>
       <div class="modal-footer">
-        <button  id="DEL_USER" name='DEL_USER' type="submit" class="btn btn-primary">confirmar</button>
+        <button  id="DEL_USER" name='DEL_USER' type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
       </div>
       </form>
     </div>
@@ -247,18 +247,18 @@ exampleModal.addEventListener('show.bs.modal', event => {
 
 
   const modalTitle = exampleModal.querySelector('.modal-title')
-  const modalNome = exampleModal.querySelector('#model-nome')
-  const modalSenha = exampleModal.querySelector('#model-email')
-  const modalEmail = exampleModal.querySelector('#model-senha')
-  const modalCargo = exampleModal.querySelector('#model-cargo')
-  const modalAtivo = exampleModal.querySelector('#model-ativo')
-  const modalCod = exampleModal.querySelector('#model-cod')
-
+  const modalNome = exampleModal.querySelector('#model-nome-a')
+  const modalSenha = exampleModal.querySelector('#model-email-a')
+  const modalEmail = exampleModal.querySelector('#model-senha-a')
+  const modalCargo = exampleModal.querySelector('#model-cargo-a')
+  const modalAtivo = exampleModal.querySelector('#model-ativo-a')
+  const modalCod = exampleModal.querySelector('#model-cod-a')
   modalTitle.textContent = `ALTERANDO VALORES DE ${nome}`
   modalNome.value = nome
   modalSenha.value = senha
   modalEmail.value = email
   modalCod.value = cod
+  alert(modalCod.value)
   if (cargo == "Adm") {
     modalCargo.checked = true;
 } else {
@@ -286,4 +286,66 @@ DelModal.addEventListener('show.bs.modal', event => {
   modalTitle.textContent = `DELETANDO USUARIO: ${nome}`
   modalCod.value = cod
 });
+
+$('#deletaUserForm').submit(function(e){
+  e.preventDefault()
+  var codigo = $('#model-cod-u').val();
+  alert('apagado com sucesso')
+  $.ajax({
+    url: 'usuariosDel.php',
+    method: 'POST',
+    data: {id_cod: codigo},
+    dataType: 'json'
+  })
+
+})
+
+$('#criaUserForm').submit(function(e){
+  e.preventDefault()
+  var nomeuser = $('#model-nome-c').val();
+  var emailuser = $('#model-email-c').val();
+  var senhauser = $('#model-senha-c').val();
+  var ativadouser = $('#model-ativo-c').val();
+  var admuser = $('#model-cargo-c').val();
+  alert(ativadouser)
+  $.ajax({
+    url: 'usuarioNovo.php',
+    method: 'POST',
+    data: {
+      nome: nomeuser,
+      email: emailuser,
+      senha: senhauser,
+      ativado: ativadouser,
+      administrador: admuser
+    },
+    dataType: 'json'
+  })
+
+})
+
+
+$('#attUserForm').submit(function(e){
+  e.preventDefault()
+  var nomeuser = $('#model-nome-a').val();
+  var emailuser = $('#model-email-a').val();
+  var senhauser = $('#model-senha-a').val();
+  var ativadouser = $('#model-ativo-a').val();
+  var admuser = $('#model-cargo-a').val();
+  var coduser = $('#model-cod-a').val();
+  alert(coduser)
+  $.ajax({
+    url: 'usuariosatt.php',
+    method: 'POST',
+    data: {
+      id_cod: coduser,
+      nome: nomeuser,
+      email: emailuser,
+      senha: senhauser,
+      ativado: ativadouser,
+      administrador: admuser
+    },
+    dataType: 'json'
+  })
+
+})
 </script>
