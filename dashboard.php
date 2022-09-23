@@ -39,10 +39,7 @@ function consulta_usuarios($condicao){
         echo "<a href='usuarios.php' target='_blank'>Alterar usuarios</a>";
     }
     ?>
-    <br>
-    <a href='#' target='_blank'>curriculos</a>
-    <br>
-    <a href='imagens.php' target='_blank'>imagens</a>
+    <a href='curriculo.php' target='_blank'>curriculo</a>
     <br>
     <a href='logout.php'>logout</a>
 <br><br>

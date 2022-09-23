@@ -48,13 +48,12 @@ CREATE TABLE `tabela_imagens` (
 --
 
 CREATE TABLE `usuarios` (
-  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` int PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `senha` varchar(20) DEFAULT NULL,
   `funcao` varchar(25) DEFAULT NULL,
-  `ativo` tinyint(1) DEFAULT NULL,
-PRIMARY KEY (`codigo`));
+  `ativo` tinyint(1) DEFAULT NULL);
 
 --
 -- Extraindo dados da tabela `usuarios`
@@ -69,19 +68,30 @@ INSERT INTO `usuarios` (`codigo`, `nome`, `email`, `senha`, `funcao`, `ativo`) V
 
 
 
-CREATE TABLE `curriculos`(
-    cod_curriculo int PRIMARY KEY AUTO_INCREMENT,
-    endereco varchar(50),
-    telefone varchar(50),
-    email varchar(50),
-    cpf varchar(50),
-    rg varchar(50),
-    cidade varchar(50),
-    uf varchar(50),
-    sexo varchar(50),
-    nome_escola varchar(50),
-    nome_faculdade varchar(50),
-    curso  varchar(50),
-    ano_formacao DATE,
-    empresas TEXT,
-    conhecimentos TEXT);
+CREATE TABLE `curriculos_pessoa`(
+    `cod_curriculo` int PRIMARY KEY AUTO_INCREMENT,
+    `nome_Completo` varchar(150) NOT NULL,
+    `cidade` varchar(50),
+    `endereco` text,
+    `telefone` varchar(50),
+    `email` varchar(50),
+    `cpf` varchar(50),
+    `rg` varchar(50),
+    `uf` varchar(50),
+    `data_nasc` DATE);
+
+CREATE TABLE `curriculos_empresas`(
+    `codigo` int PRIMARY KEY AUTO_INCREMENT,
+    `cod_curriculo` int NOT NULL,
+    `razao_Social` varchar(50) NOT NULL,
+    `periodo_ini` DATE NOT NULL,
+    `periodo_fim` DATE,
+    `descricao_empresa` TEXT);
+
+CREATE TABLE `curriculos_conhecimento`(
+    `codigo` int PRIMARY KEY AUTO_INCREMENT,
+    `cod_curriculo` int NOT NULL,
+    `Nome_instituicao` varchar(50) NOT NULL,
+    `periodo_ini` DATE NOT NULL,
+    `periodo_fim` DATE,
+    `descricao_academica` TEXT);

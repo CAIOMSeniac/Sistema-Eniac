@@ -23,7 +23,7 @@ include_once('conexao_Banco.php');
                         VALUES ('".$evento."','".$desc."','".$nome."',
                                 '".$tamanho."','".$tipo."','".$conteudo."',".$cd.")";
             $result = mysqli_query($conn,$querySQL);
-            header('Location:imagens.php');
+            header('Location:curriculo.php');
         }
     }
 ?>
