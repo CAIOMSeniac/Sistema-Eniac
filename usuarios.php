@@ -1,26 +1,3 @@
-<?php
-session_start();
-include_once('conexao_Banco.php');
-$cond = "1=1 ";
-if(isset($_POST['buscar'])){
-    if (isset($_POST['ATIVOS'])) {
-        $cond .= "AND `ativo` = 1 ";
-    }
-    if (isset($_POST['DESATIVOS'])) {
-        $cond .= "AND `ativo` = 0 ";
-    }
-    if (isset($_POST['ADM'])) {
-        $cond .= 'AND `funcao` = "Adm" ';
-    }
-    if (isset($_POST['USER'])) {
-        $cond .= 'AND `funcao` = "User" ';
-    }
-    if (isset($_POST['buscaNome']) && strlen($_POST['buscaNome']) > 0) {
-        $nome = mysqli_real_escape_string($conn,$_POST['buscaNome']);
-        $cond .= 'AND `nome` LIKE "%'.$nome.'%" ';
-    }
-};
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,22 +15,22 @@ if(isset($_POST['buscar'])){
 <body>
 <br>
 <!--CONDIÇÕES DE BUSCA/ FILTROS-->
-<form method="POST">
+<form id="filtr"method="POST">
 <div class="input-group mb-3">
  <span class="input-group-text" id="basic-addon1">
-    <input name='ATIVOS' type="checkbox" class="btn-check" id="btn-check"  autocomplete="off">
+    <input name='ATIVOSFILTRO' type="checkbox" class="btn-check1" id="ATIVOSFILTRO"  autocomplete="off">
     <label class="btn btn-primary" for="btn-check">ATIVOS</label>
 </span><span class="input-group-text" id="basic-addon1">
-    <input name="DESATIVOS" type="checkbox" class="btn-check" id="btn-check-2"  autocomplete="off">
+    <input name="DESATIVOSFILTRO" type="checkbox" class="btn-check2" id="DESATIVOSFILTRO"  autocomplete="off">
     <label class="btn btn-primary" for="btn-check-2">NÃO ATIVOS</label>
 </span><span class="input-group-text" id="basic-addon1">
-    <input name="ADM" type="checkbox" class="btn-check" id="btn-check-3"  autocomplete="off">
+    <input name="ADMFILTRO" type="checkbox" class="btn-check3" id="ADMFILTRO"  autocomplete="off">
     <label class="btn btn-primary" for="btn-check-3">ADMINISTRADORES</label>
 </span><span class="input-group-text" id="basic-addon1">
-    <input name="USER" type="checkbox" class="btn-check" id="btn-check-4"  autocomplete="off">
+    <input name="USERFILTRO" type="checkbox" class="btn-check4" id="USERFILTRO"  autocomplete="off">
     <label class="btn btn-primary" for="btn-check-4">USUARIOS</label>
 </span><span class="input-group-text" id="basic-addon1">Busca</span>
-<input type="text" name="buscaNome"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
+<input type="text" id="buscaNomeFILTRO" name="buscaNomeFILTRO"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
 <span class="input-group-text" id="basic-addon1">
     <button name = 'buscar' class="btn btn-outline-secondary" type="submit">FILTRAR</button>
 </span>
@@ -71,43 +48,7 @@ if(isset($_POST['buscar'])){
       <th scope="col">opções</th>
     </tr>
    </thead>
-   <tbody>
-    <?php
-    ListarUsuarios($cond);
-    function ListarUsuarios($condicao){
-        $servidor = 'localhost';
-        $usuario = 'root';
-        $senha = '';
-        $banco = 'colegio';
-        $conn = new mysqli($servidor, $usuario, $senha, $banco);
-        if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
-        $querySql = "SELECT * FROM `usuarios` WHERE ".$condicao."";
-        $res = mysqli_query($conn,$querySql);
-        while($linha=mysqli_fetch_assoc($res)){
-            echo "<tr>";
-            echo "<td>".$linha["nome"]."</td>";
-            echo "<td>".$linha["email"]."</td>";
-            echo "<td>".$linha["senha"]."</td>";
-            echo "<td>".$linha["funcao"]."</td>";
-            echo "<td>".$linha["ativo"]."</td>";
-            echo '<td>
-            <div class="dropdown">
-            <div class="btn-group">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              opções
-            </button>
-            <ul class="dropdown-menu">
-            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeletaUser" NOMEUSER="'.$linha["nome"].'" CODUSER="'.$linha["codigo"].'">
-            DELETAR</button></li></li>
-            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#alterarValoresUser" NOMEUSER="'.$linha["nome"].'" SENHAUSER="'.$linha["senha"].'" EMAILUSER="'.$linha["email"].'" CARGOUSER="'.$linha["funcao"].'" ATIVOUSER="'.$linha["ativo"].'" CODUSER="'.$linha["codigo"].'">
-              ALTERAR</button></li>
-            </ul>
-          </div>
-          </td>';
-            echo "</tr>";
-        }
-    }
-    ?>
+   <tbody id="comecConsul">
   </tbody>
  </table>
  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaUser">
@@ -175,11 +116,11 @@ CRIAR NOVO USUARIO
         <form id='criaUserForm' method="POST">
 
         <div class="form-check form-switch">
-        <input id="model-cargo-c" value="1" name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <input id="model-cargo-c"  name="model-cargo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label  class="form-check-label" for="flexSwitchCheckDefault">ADMINISTRADOR</label>
         </div>
         <div class="form-check form-switch">
-        <input id="model-ativo-c" value="1" name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+        <input id="model-ativo-c"  name="model-ativo" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         <label  class="form-check-label" for="flexSwitchCheckDefault">ATIVADO</label>
         </div>
 
@@ -248,8 +189,8 @@ exampleModal.addEventListener('show.bs.modal', event => {
 
   const modalTitle = exampleModal.querySelector('.modal-title')
   const modalNome = exampleModal.querySelector('#model-nome-a')
-  const modalSenha = exampleModal.querySelector('#model-email-a')
-  const modalEmail = exampleModal.querySelector('#model-senha-a')
+  const modalEmail = exampleModal.querySelector('#model-email-a')
+  const modalSenha = exampleModal.querySelector('#model-senha-a')
   const modalCargo = exampleModal.querySelector('#model-cargo-a')
   const modalAtivo = exampleModal.querySelector('#model-ativo-a')
   const modalCod = exampleModal.querySelector('#model-cod-a')
@@ -258,7 +199,6 @@ exampleModal.addEventListener('show.bs.modal', event => {
   modalSenha.value = senha
   modalEmail.value = email
   modalCod.value = cod
-  alert(modalCod.value)
   if (cargo == "Adm") {
     modalCargo.checked = true;
 } else {
@@ -290,12 +230,14 @@ DelModal.addEventListener('show.bs.modal', event => {
 $('#deletaUserForm').submit(function(e){
   e.preventDefault()
   var codigo = $('#model-cod-u').val();
-  alert('apagado com sucesso')
   $.ajax({
     url: 'usuariosDel.php',
     method: 'POST',
     data: {id_cod: codigo},
     dataType: 'json'
+  }).done(function(a) {
+    alert('aaaa')
+    Consulta()
   })
 
 })
@@ -305,9 +247,8 @@ $('#criaUserForm').submit(function(e){
   var nomeuser = $('#model-nome-c').val();
   var emailuser = $('#model-email-c').val();
   var senhauser = $('#model-senha-c').val();
-  var ativadouser = $('#model-ativo-c').val();
-  var admuser = $('#model-cargo-c').val();
-  alert(ativadouser)
+  var ativadouser = $('#model-ativo-c').is(":checked");
+  var admuser = $('#model-cargo-c').is(":checked");
   $.ajax({
     url: 'usuarioNovo.php',
     method: 'POST',
@@ -319,6 +260,9 @@ $('#criaUserForm').submit(function(e){
       administrador: admuser
     },
     dataType: 'json'
+  }).done(function(b) {
+    alert('aaaa')
+    Consulta()
   })
 
 })
@@ -329,10 +273,10 @@ $('#attUserForm').submit(function(e){
   var nomeuser = $('#model-nome-a').val();
   var emailuser = $('#model-email-a').val();
   var senhauser = $('#model-senha-a').val();
-  var ativadouser = $('#model-ativo-a').val();
-  var admuser = $('#model-cargo-a').val();
+  var ativadouser = $('#model-ativo-a').is(":checked");
+  var admuser = $('#model-cargo-a').is(":checked");
   var coduser = $('#model-cod-a').val();
-  alert(coduser)
+  console.log(nomeuser)
   $.ajax({
     url: 'usuariosatt.php',
     method: 'POST',
@@ -345,7 +289,41 @@ $('#attUserForm').submit(function(e){
       administrador: admuser
     },
     dataType: 'json'
+  }).done(function(b) {
+    Consulta()
   })
 
 })
+$('#filtr').submit(function(e){
+  e.preventDefault()
+  Consulta()
+})
+
+function Consulta(){
+  var ativosfiltro = $('#ATIVOSFILTRO').is(":checked");
+  var desativosfiltro = $('#DESATIVOSFILTRO').is(":checked");
+  var admfiltro = $('#ADMFILTRO').is(":checked");
+  var userfiltro = $('#USERFILTRO').is(":checked");
+  var nomeBuscafi = $('#buscaNomeFILTRO').val();
+  console.log(nomeBuscafi)
+  $.ajax({
+    url: 'usuariosSelec.php',
+    method: 'POST',
+    data: {
+      ativo:ativosfiltro,
+      desat:desativosfiltro,
+      adm:admfiltro,
+      use:userfiltro,
+      non: nomeBuscafi
+    },
+    dataType: 'json'
+  }).done(function(result) {
+    console.log(nomeBuscafi)
+    $('#comecConsul').empty();
+    for(var i = 0; i < result.length; i++){
+      $('#comecConsul').prepend('<tr><td>'+  result[i][1] +'</td><td>'+  result[i][2] +'</td><td>'+  result[i][3] +'</td><td>'+  result[i][4] +'</td><td>'+  result[i][5] +'</td><td><div class="dropdown"><div class="btn-group"><button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">opções</button><ul class="dropdown-menu"><li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeletaUser" NOMEUSER="'+  result[i][1] +'" CODUSER="'+  result[i][0] +'">DELETAR</button></li></li><li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#alterarValoresUser" NOMEUSER="'+  result[i][1] +'" SENHAUSER="'+  result[i][3] +'" EMAILUSER="'+  result[i][2] +'" CARGOUSER="'+  result[i][4] +'" ATIVOUSER="'+  result[i][5] +'" CODUSER="'+  result[i][0] +'">ALTERAR</button></li></ul></div></td></tr>');
+    }
+  })
+}
+Consulta()
 </script>

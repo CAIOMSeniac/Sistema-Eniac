@@ -1,22 +1,3 @@
-<?php
-
-session_start();
-include_once('conexao_Banco.php');
-$cond = "1=1 ";
-if(isset($_POST['buscar'])){
-    if (isset($_POST['MIN_COD_CURRICULO']) && strlen($_POST['MIN_COD_CURRICULO']) > 0) {
-        $min = mysqli_real_escape_string($conn,$_POST['MIN_COD_CURRICULO']);
-        $cond .= "AND `cod_curriculo` > $min ";
-    }
-    if (isset($_POST['MAX_COD_CURRICULO']) && strlen($_POST['MAX_COD_CURRICULO']) > 0) {
-        $max = mysqli_real_escape_string($conn,$_POST['MAX_COD_CURRICULO']);
-        $cond .= "AND `cod_curriculo` < $max ";
-    }
-    if (isset($_POST['buscaNome'] ) && strlen($_POST['buscaNome']) > 0) {
-        $nome = mysqli_real_escape_string($conn,$_POST['buscaNome']);
-        $cond .= 'AND `nome_Completo` LIKE "%'.$nome.'%" ';
-    }}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,19 +15,19 @@ if(isset($_POST['buscar'])){
 </head>
 <body>
   <!--CONDIÇÕES DE BUSCA/ FILTROS-->
-<form  method="POST">
+<form  id="filtr" method="POST">
 <div class="input-group mb-3">
 <span class="input-group-text" id="basic-addon1">
 ENTRE
 </span>
  <span class="input-group-text" id="basic-addon1">
- <input type="text" name="MIN_COD_CURRICULO"class="form-control" placeholder="MIN_COD_CURRICULO" aria-label="Username" aria-describedby="basic-addon1">
+ <input type="text" id="MIN_COD_CURRICULO"class="form-control" placeholder="MIN_COD_CURRICULO" aria-label="Username" aria-describedby="basic-addon1">
 </span><span class="input-group-text" id="basic-addon1">
  ATÉ
 </span><span class="input-group-text" id="basic-addon1">
-<input type="text" name="MAX_COD_CURRICULO"class="form-control" placeholder="MAX_COD_CURRICULO" aria-label="Username" aria-describedby="basic-addon1">
+<input type="text" id="MAX_COD_CURRICULO"class="form-control" placeholder="MAX_COD_CURRICULO" aria-label="Username" aria-describedby="basic-addon1">
 </span><span class="input-group-text" id="basic-addon1">Busca</span>
-<input type="text" name="buscaNome"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
+<input type="text" id="buscaNomeFILTRO"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
 <span class="input-group-text" id="basic-addon1">
     <button name = 'buscar' class="btn btn-outline-secondary" type="submit">FILTRAR</button>
 </span>
@@ -72,47 +53,8 @@ ALTERA CURRICULO
 
     </tr>
    </thead>
-   <tbody>
+   <tbody id="comecConsul">
 
-    <?php
-    ListarUsuarios($cond);
-    function ListarUsuarios($condicao){
-        $servidor = 'localhost';
-        $usuario = 'root';
-        $senha = '';
-        $banco = 'colegio';
-        $conn = new mysqli($servidor, $usuario, $senha, $banco);
-        if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
-        $querySql = "SELECT * FROM  `curriculos_pessoa` WHERE ".$condicao."";
-        $res = mysqli_query($conn,$querySql);
-        while($linha=mysqli_fetch_assoc($res)){
-            echo "<tr>";
-            echo "<td>".$linha["nome_Completo"]."</td>";
-            echo "<td>
-            <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#Curriculo' 
-            NOME='".$linha["nome_Completo"]."' DATANASC='".$linha["data_nasc"]."' ENDERECO='".$linha["endereco"]."' 
-            CIDADE='".$linha["cidade"]."' EMAIL='".$linha["email"]."' TELL='".$linha["telefone"]."' 
-            CODCURR ='".$linha["cod_curriculo"]."' onclick='carregaImg(".$linha["cod_curriculo"].")'>
-            Mostrar curriculo
-            </button>
-            </td>";
-            echo "<td>
-            <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#AtualizaCurriculo' 
-            CODCURR ='".$linha["cod_curriculo"]."'>
-            Atualizar curriculo
-            </button>
-            </td>";
-            echo "<td>
-            <button type='button' class='dropdown-item' data-bs-toggle='modal' data-bs-target='#Curriculo' 
-            CODCURR ='".$linha["cod_curriculo"]."'>
-            Deletar curriculo
-            </button>
-            </td>";
-            echo "<td>".$linha["cod_curriculo"]."</td>";
-            echo "</tr>";
-        }
-    }
-    ?>
   </tbody>
  </table>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
@@ -133,21 +75,7 @@ CRIAR NOVO CURRICULO
       <div class="modal-body">
         <div class="container text-center">
           <div class="row">
-            <div class="col-sm-5">
-             <?php
-              function imagemCurriculo($cod_cur){
-                $servidor = 'localhost';
-                $usuario = 'root';
-                $senha = '';
-                $banco = 'colegio';
-                $conn = new mysqli($servidor, $usuario, $senha, $banco);
-                $querySql = "SELECT * FROM  `tabela_imagens` WHERE `cod_curriculo` = ".$cod_cur."";
-                $res = mysqli_query($conn,$querySql);
-                while($linha=mysqli_fetch_assoc($res)){
-                  echo "<embed src='data:".$linha['tipo_imagem'].";base64,".base64_encode($linha['imagem'])."' class='figure-img img-fluid rounded'/>";
-                }
-              }
-             ?>
+            <div class="col-sm-5" id="imagemCurr">
             </div>
             <div class="col-sm-7">
               <h5 class="nomeComp">NOME COMPLETO</h5>
@@ -258,12 +186,23 @@ CRIAR NOVO CURRICULO
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
       Novo conhecimento/escolaridade
       </button>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
-      Nova experiencia
+      Nova experiencia profissional
+      </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
+      Mudar Imagem
+      </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
+      Alterar Dados pessoais
+      </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
+      Alterar conhecimento/escolaridade
+      </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
+      Alterar experiencia profissional
       </button>
     </div>
   </div>
@@ -282,6 +221,7 @@ CRIAR NOVO CURRICULO
 
 
 <script type="text/javascript">
+
 const CurriculoModal = document.getElementById('Curriculo')
 CurriculoModal.addEventListener('show.bs.modal', event => {
 
@@ -294,7 +234,7 @@ CurriculoModal.addEventListener('show.bs.modal', event => {
   const cidade = button.getAttribute('CIDADE');
   const email = button.getAttribute('EMAIL');
   const tell = button.getAttribute('TELL');
-
+  const cod_curriculo = button.getAttribute('CODCURR');
 
 
   //const modalCod = CurriculoModal.querySelector('#model-cod-u')
@@ -312,9 +252,53 @@ CurriculoModal.addEventListener('show.bs.modal', event => {
   modaltelef.textContent = `telefone: ${tell}`;
   modalemail.textContent = `email: ${email}`;
   //modalCod.value = cod
+  CarregaImg(cod_curriculo)
 });
 
-function carregaImg(cod){
- 
+function CarregaImg(id_curriculo){
+  $.ajax({
+    url: 'curriculoSelecImg.php',
+    method: 'POST',
+    data: {
+      id_cod: id_curriculo
+    },
+    dataType: 'html'
+  }).done(function(result) {
+    console.log(result);
+    $('#imagemCurr').empty();
+    $('#imagemCurr').prepend(result)
+
+  })
 }
+
+
+
+
+
+$('#filtr').submit(function(e){
+  e.preventDefault()
+  Consulta()
+})
+function Consulta(){
+  var nomeBuscafi = $('#buscaNomeFILTRO').val();
+  var MINCod = $('#MIN_COD_CURRICULO').val();
+  var MAXCod = $('#MAX_COD_CURRICULO').val();
+
+  $.ajax({
+    url: 'curriculoSelec.php',
+    method: 'POST',
+    data: {
+      NomeCur: nomeBuscafi,
+      MINCodigo: MINCod,
+      MAXCodigo: MAXCod
+    },
+    dataType: 'json'
+  }).done(function(result) {
+    $('#comecConsul').empty();
+    for(var i = 0; i < result.length; i++){
+      $('#comecConsul').prepend('<tr><td>'+  result[i][1] +'</td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Curriculo" NOME="'+  result[i][1] +'" DATANASC="'+  result[i][9] +'" ENDERECO="'+  result[i][3] +'" CIDADE="'+  result[i][2] +'" EMAIL="'+  result[i][5] +'" TELL="'+  result[i][4] +'" CODCURR ="'+  result[i][0] +'">Mostrar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AtualizaCurriculo" CODCURR ="'+  result[i][0] +'">Atualizar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Curriculo" CODCURR ="'+  result[i][0] +'">Deletar curriculo</button></td><td>'+  result[i][0] +'</td></tr>');
+    }
+  })
+}
+Consulta()
 </script>

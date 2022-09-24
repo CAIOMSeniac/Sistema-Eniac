@@ -19,4 +19,5 @@ $email = mysqli_real_escape_string($conn,$_POST['email']);
 $querySQL .=",'$nome','$email','$senha')";
 $result = mysqli_query($conn,$querySQL);
 
+
 ?>

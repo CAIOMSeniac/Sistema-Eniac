@@ -28,15 +28,14 @@ CREATE DATABASE `colegio`;
 --
 
 CREATE TABLE `tabela_imagens` (
-  `codigo` int(10) NOT NULL AUTO_INCREMENT,
   `evento` varchar(50) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `nome_imagem` varchar(25) NOT NULL,
   `tamanho_imagem` varchar(25) NOT NULL,
   `tipo_imagem` varchar(25) NOT NULL,
   `imagem` longblob NOT NULL,
-  `cod_curriculo` int(11) NOT NULL,
-  PRIMARY KEY (`codigo`)
+  `cod_curriculo`  NOT NULL,
+  PRIMARY KEY (`cod_curriculo`)
 );
 
 --
