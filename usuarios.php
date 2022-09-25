@@ -236,7 +236,6 @@ $('#deletaUserForm').submit(function(e){
     data: {id_cod: codigo},
     dataType: 'json'
   }).done(function(a) {
-    alert('aaaa')
     Consulta()
   })
 
@@ -261,7 +260,6 @@ $('#criaUserForm').submit(function(e){
     },
     dataType: 'json'
   }).done(function(b) {
-    alert('aaaa')
     Consulta()
   })
 
