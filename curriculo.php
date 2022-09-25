@@ -636,6 +636,12 @@ $('#MDIMForm').submit(function(e){
   var even = $('#model-nome-NVE').val();
   var desc = $('#model-DATA_INI-NVE').val();
   var cd_c = $('#model-DATA_FIM-NVE').val();
+  Form =  new FormData();
+  Form.append('EVENTO', even);
+  Form.append('DESCRI', desc);
+  Form.append('cod_curriculo', cd_c);
+  Form.append("meuarquivo", document.getElementById('meuarquivo').files[0]);
+  console.log(Form)
   //var fd = $('#meuarquivo').val();
 //  var data = new FormData();
 //jQuery.each(jQuery('#meuarquivo')[0].files, function(i, file) {
@@ -647,18 +653,13 @@ $('#MDIMForm').submit(function(e){
   $.ajax({
     url: 'imagemNova.php',
     method: 'POST',
-    enctype: 'multipart/form-data',
+    //enctype: 'multipart/form-data',
     processData: false,  // Important!
     contentType: false,
-    cache: false,
-    data: {
-      EVENTO: even,
-      DESCRI: desc,
-      cod_curriculo: cd_c,
-      data
-    },
+    data: Form,
     dataType: 'json'
   }).done(function(b) {
+    console.log(b);
     Consulta()
   })
 
