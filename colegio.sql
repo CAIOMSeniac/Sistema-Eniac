@@ -34,7 +34,7 @@ CREATE TABLE `tabela_imagens` (
   `tamanho_imagem` varchar(25) NOT NULL,
   `tipo_imagem` varchar(25) NOT NULL,
   `imagem` longblob NOT NULL,
-  `cod_curriculo`  NOT NULL,
+  `cod_curriculo` int,
   PRIMARY KEY (`cod_curriculo`)
 );
 
