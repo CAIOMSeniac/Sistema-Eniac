@@ -86,26 +86,19 @@ CRIAR NOVO CURRICULO
               <h6 class="email">email</h6>
             </div>
           </div>
+          <br><br>
           <div class="row">
-            <div class="col-sm btn btn-primary">
+            <div>
               <h5>Formação academica</h5>
-              <hr>
-              <h5>NOME COMPLETO</h5>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
+              <div id="formacaoacad"></div>
+
             </div>
           </div>
+          <br><br>
           <div class="row">
-            <div class="col-sm btn btn-primary">
+            <div >
               <h5>Experiencia profissional</h5>
-              <hr>
-              <h5>NOME COMPLETO</h5>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
-              <h6>data de nascimento</h6>
+              <div id="experienciaprof"></div>
             </div>
           </div>
         </div>
@@ -198,7 +191,7 @@ CRIAR NOVO CURRICULO
       Mudar Imagem
       </button>
       <br><br>
-      <button id="btn-MDIP" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#" >
+      <button id="btn-MDIP" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AttINFPCurr" >
       Alterar Dados pessoais
       </button>
       <br><br>
@@ -301,7 +294,7 @@ CRIAR NOVO CURRICULO
 
 
 
-
+<!----------MUDA IMAGEM CURRICULO------------>
 <div class="modal fade" id="MDIMModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -329,12 +322,77 @@ CRIAR NOVO CURRICULO
           <input type="hidden"class="form-control" id="model-codcurriculo-MDIM">
       </div>
       <div class="modal-footer">
-        <button  id="env-MDIM" type="submit" class="btn btn-primary">confirmar</button>
+        <button  id="env-MDIM" type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
       </div>
       </form>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+<!-----------ATUALIZA DADOS PESSOAIS------------>
+<div class="modal fade" id="AttINFPCurr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrando novo Curriculo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form id="AttINFPCurrForm" method="POST">
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label"> NOME COMPLETO:</label>
+            <input required type="text" name="model-NOME" class="form-control" id="model-NOME-MDIP">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">RG:</label>
+            <input required type="text" name="model-RG" class="form-control" id="model-RG-MDIP">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">CPF:</label>
+            <input required type="text" name="model-CPF" class="form-control" id="model-CPF-MDIP">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">UF:</label>
+            <input required type="text" name="model-UF" class="form-control" id="model-UF-MDIP">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">DATA NASCIMENTO:</label>
+            <input required type="date" name="model-DATA_NASC" class="form-control" id="model-DATA_NASC-MDIP">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">CIDADE:</label>
+            <input required type="text" name="model-CIDADE" class="form-control" id="model-CIDADE-MDIP">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">ENDEREÇO:</label>
+            <input required type="text" name="model-ENDERECO" class="form-control" id="model-ENDERECO-MDIP" placeholder="RUA, 123 ">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">EMAIL:</label>
+            <input required type="text" name="model-EMAIL" class="form-control" id="model-EMAIL-MDIP" placeholder="email@email.com.br">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">TELEFONE:</label>
+            <input required type="text" name="model-TELEFONE" class="form-control" id="model-TELEFONE-MDIP" placeholder="+55 11 12345-6789">
+          </div>
+          <input type="hidden"class="form-control" id="model-codcurriculo-MDIP">
+      </div>
+      <div class="modal-footer">
+        <button  id="SubMDIP" name='SubMDIP' type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 
@@ -374,8 +432,22 @@ async function mostraCurric(){
   modalemail.textContent = `email: ${email}`;
   //modalCod.value = cod
   CarregaImg(cod_curriculo)
-  var test = await BuscaRapida(cod_curriculo,'pessoa')
-  console.log(test[0][1])
+  var formacao = await BuscaRapida(cod_curriculo,'conhecimento')
+  if (formacao != null) {
+  result = formacao
+  $('#formacaoacad').empty();
+    for(var i = 0; i < result.length; i++){
+      $('#formacaoacad').prepend('<hr><h5>nome da instituição: '+result[i][2]+ '</h5><h7>periodo: '+result[i][3]+ ' até '+result[i][4]+ '</h7><br><h7>descrição: '+result[i][5]+ '</h7>');
+    }
+  }
+  var experien = await BuscaRapida(cod_curriculo,'experiencia')
+  if (experien != null) {
+  result = experien
+  $('#experienciaprof').empty();
+    for(var i = 0; i < result.length; i++){
+      $('#experienciaprof').prepend('<hr><h5>razão social: '+result[i][2]+ '</h5><h7>periodo: '+result[i][3]+ ' até '+result[i][4]+ '</h7><br><h7>descrição: '+result[i][5]+ '</h7>')
+    }
+  }
 };
 
 
@@ -465,6 +537,38 @@ async function MDIMCurric(){
 
 
 
+const AttINFPCurrModal = document.getElementById('AttINFPCurr')
+AttINFPCurrModal.addEventListener('show.bs.modal',event => {
+  AtuaCurricMDIP()
+});
+
+async function AtuaCurricMDIP(){
+  const button = event.relatedTarget;
+  const cod_curriculo = button.getAttribute('CODCURR');
+  const modalTitle = AttINFPCurrModal.querySelector('.modal-title');
+  const modalCod = AttINFPCurrModal.querySelector('#model-codcurriculo-MDIP')
+  const nome = AttINFPCurrModal.querySelector('#model-NOME-MDIP')
+  const email = AttINFPCurrModal.querySelector('#model-EMAIL-MDIP')
+  const tel = AttINFPCurrModal.querySelector('#model-TELEFONE-MDIP')
+  const rg = AttINFPCurrModal.querySelector('#model-RG-MDIP')
+  const cpf = AttINFPCurrModal.querySelector('#model-CPF-MDIP')
+  const uf = AttINFPCurrModal.querySelector('#model-UF-MDIP')
+  const dt_nasc = AttINFPCurrModal.querySelector('#model-DATA_NASC-MDIP')
+  const endereco = AttINFPCurrModal.querySelector('#model-ENDERECO-MDIP')
+  const cidade = AttINFPCurrModal.querySelector('#model-CIDADE-MDIP')
+  var result = await BuscaRapida(cod_curriculo,'pessoa')
+  modalCod.value = cod_curriculo;
+  nome.value = result[0][1]
+  cidade.value = result[0][2]
+  endereco.value = result[0][3]
+  tel.value = result[0][4]
+  email.value = result[0][5]
+  cpf.value = result[0][6]
+  rg.value = result[0][7]
+  uf.value = result[0][8]
+  dt_nasc.value = result[0][9]
+}
+
 
 /// AJAX PUXANDO INFORMAÇÕES
 function CarregaImg(id_curriculo){
@@ -524,6 +628,7 @@ function BuscaRapida(id_curriculo,Tabela){ //  'conhecimento'     'experiencia' 
     },
     dataType: 'json'
   }).done(function(result) {
+    console.log(result);
     resolve(result);
   })
 })
@@ -536,7 +641,7 @@ function BuscaRapida(id_curriculo,Tabela){ //  'conhecimento'     'experiencia' 
 $('#CriaCurriculoForm').submit(function(e){
   e.preventDefault()
   var nome = $('#model-NOME').val();
-  var email = $('model-EMAIL').val();
+  var email = $('#model-EMAIL').val();
   var tel = $('#model-TELEFONE').val();
   var rg = $('#model-RG').val();
   var cpf = $('#model-CPF').val();
@@ -644,7 +749,43 @@ $('#MDIMForm').submit(function(e){
     data: Form,
     dataType: 'json'
   }).done(function(b) {
-    console.log(b);
+    Consulta()
+  })
+
+});
+
+
+
+$('#AttINFPCurrForm').submit(function(e){
+  e.preventDefault()
+  var nome = $('#model-NOME-MDIP').val();
+  var email = $('#model-EMAIL-MDIP').val();
+  var tel = $('#model-TELEFONE-MDIP').val();
+  var rg = $('#model-RG-MDIP').val();
+  var cpf = $('#model-CPF-MDIP').val();
+  var uf = $('#model-UF-MDIP').val();
+  var dt_nasc = $('#model-DATA_NASC-MDIP').val();
+  var endereco = $('#model-ENDERECO-MDIP').val();
+  var cidade = $('#model-CIDADE-MDIP').val();
+  var cd_c = $('#model-codcurriculo-MDIP').val();
+  console.log(nome,email,cidade,endereco,cd_c)
+  $.ajax({
+    url: 'curriculoAttInfPes.php',
+    method: 'POST',
+    data: {
+      NOME: nome,
+      EMAIL: email,
+      TELEFONE: tel,
+      RG: rg,
+      CPF: cpf,
+      UF: uf,
+      DATA_NASC: dt_nasc,
+      ENDERECO: endereco,
+      CIDADE: cidade,
+      cod_curriculo: cd_c
+    },
+    dataType: 'json'
+  }).done(function(b) {
     Consulta()
   })
 

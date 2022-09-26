@@ -25,4 +25,7 @@ else if ($_POST['tb'] == 'conhecimento'){
     $resultados=mysqli_fetch_all($res);
     echo json_encode($resultados);
 }
+else{
+    echo json_encode('erro tabela não encontrada');
+}
 ?>

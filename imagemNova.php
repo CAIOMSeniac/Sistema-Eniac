@@ -13,8 +13,9 @@ $conteudo = fread($fp, $tamanho);
 $conteudo = addslashes($conteudo);
 fclose($fp);
 $erro = $_FILES['meuarquivo']['error'];
-echo json_encode($evento);
 if($erro < 1){
+    $querySQL =  "DELETE FROM `tabela_imagens` WHERE `cod_curriculo` = '".$cd."'";
+    $result = mysqli_query($conn,$querySQL);
     $querySQL ="INSERT INTO `tabela_imagens`(`evento`, `descricao`, `nome_imagem`,
                             `tamanho_imagem`, `tipo_imagem`, `imagem`, `cod_curriculo`)
                 VALUES ('".$evento."','".$desc."','".$nome."',
