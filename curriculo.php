@@ -623,33 +623,18 @@ $('#NovoExperForm').submit(function(e){
 
 
 
-//$(function () {
-//  $('#meuarquivo').on('change',function(e){
- //   if(e.target.files.length != 0 && e.target.files != null){
- //     var arquivo = e.target.files[0];
- //     fd = new FormData();
- //     fd.append('meuarquivo',arquivo)
- //     console.log(fd != null);
- // }})
+
 $('#MDIMForm').submit(function(e){
   e.preventDefault()
-  var even = $('#model-nome-NVE').val();
-  var desc = $('#model-DATA_INI-NVE').val();
-  var cd_c = $('#model-DATA_FIM-NVE').val();
+  var even = $('#model-evento-MDIM').val();
+  var desc = $('#model-desc-MDIM').val();
+  var cd_c = $('#model-codcurriculo-MDIM').val();
+  console.log(even, desc, cd_c)
   Form =  new FormData();
   Form.append('EVENTO', even);
   Form.append('DESCRI', desc);
   Form.append('cod_curriculo', cd_c);
   Form.append("meuarquivo", document.getElementById('meuarquivo').files[0]);
-  console.log(Form)
-  //var fd = $('#meuarquivo').val();
-//  var data = new FormData();
-//jQuery.each(jQuery('#meuarquivo')[0].files, function(i, file) {
-//    data.append('file-'+i, file);
-//    console.log(data)
-//});
-
-
   $.ajax({
     url: 'imagemNova.php',
     method: 'POST',
@@ -663,5 +648,5 @@ $('#MDIMForm').submit(function(e){
     Consulta()
   })
 
-})//});
+});
 </script>

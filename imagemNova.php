@@ -19,6 +19,7 @@ if($erro < 1){
                             `tamanho_imagem`, `tipo_imagem`, `imagem`, `cod_curriculo`)
                 VALUES ('".$evento."','".$desc."','".$nome."',
                         '".$tamanho."','".$tipo."','".$conteudo."',".$cd.")";
+    
     $result = mysqli_query($conn,$querySQL);
 }
 ?>
