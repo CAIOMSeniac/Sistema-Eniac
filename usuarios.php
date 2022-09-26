@@ -62,18 +62,25 @@
 <form id="filtr"method="POST">
 <div class="input-group mb-3">
  <span class="input-group-text" id="basic-addon1">
+ <div class="form-check">
     <input name='ATIVOSFILTRO' type="checkbox" class="form-check-input" id="ATIVOSFILTRO"  autocomplete="off">
     <label class="form-check-label" for="btn-check"> ATIVOS</label>
+    </div>
 </span><span class="input-group-text" id="basic-addon1">
+<div class="form-check">
     <input name="DESATIVOSFILTRO" type="checkbox" class="form-check-input" id="DESATIVOSFILTRO"  autocomplete="off">
     <label class="form-check-label" for="btn-check-2">NÃO ATIVOS</label>
+    </div>
 </span><span class="input-group-text" id="basic-addon1">
+<div class="form-check">
     <input name="ADMFILTRO" type="checkbox" class="form-check-input" id="ADMFILTRO"  autocomplete="off">
     <label class="form-check-label" for="btn-check-3">ADMINISTRADORES</label>
+    </div>
 </span><span class="input-group-text" id="basic-addon1">
+<div class="form-check">
     <input name="USERFILTRO" type="checkbox" class="form-check-input" id="USERFILTRO"  autocomplete="off">
-
     <label class="form-check-label" for="btn-check-4">USUARIOS</label>
+    </div>
 </span><span class="input-group-text" id="basic-addon1">Busca</span>
 <input type="text" id="buscaNomeFILTRO" name="buscaNomeFILTRO"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
 <span class="input-group-text" id="basic-addon1">
@@ -152,7 +159,7 @@ CRIAR NOVO USUARIO
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ALTERANDO VALOR DE</h5>
+        <h5 class="modal-title" id="exampleModalLabel">ALTERANDO VALOR DE:</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -239,7 +246,7 @@ exampleModal.addEventListener('show.bs.modal', event => {
   const modalCargo = exampleModal.querySelector('#model-cargo-a')
   const modalAtivo = exampleModal.querySelector('#model-ativo-a')
   const modalCod = exampleModal.querySelector('#model-cod-a')
-  modalTitle.textContent = `ALTERANDO VALORES DE ${nome}`
+  modalTitle.textContent = `ALTERANDO VALORES DE: ${nome}`
   modalNome.value = nome
   modalSenha.value = senha
   modalEmail.value = email

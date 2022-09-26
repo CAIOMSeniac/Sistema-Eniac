@@ -66,11 +66,11 @@
 ENTRE
 </span>
  <span class="input-group-text" id="basic-addon1">
- <input type="text" id="MIN_COD_CURRICULO"class="form-control" placeholder="MIN_COD_CURRICULO" aria-label="Username" aria-describedby="basic-addon1">
+ <input type="text" id="MIN_COD_CURRICULO"class="form-control" placeholder="Min_Cod_Currículo" aria-label="Username" aria-describedby="basic-addon1">
 </span><span class="input-group-text" id="basic-addon1">
  ATÉ
 </span><span class="input-group-text" id="basic-addon1">
-<input type="text" id="MAX_COD_CURRICULO"class="form-control" placeholder="MAX_COD_CURRICULO" aria-label="Username" aria-describedby="basic-addon1">
+<input type="text" id="MAX_COD_CURRICULO"class="form-control" placeholder="Max_Cod_Currículo" aria-label="Username" aria-describedby="basic-addon1">
 </span><span class="input-group-text" id="basic-addon1">Busca</span>
 <input type="text" id="buscaNomeFILTRO"class="form-control" placeholder="NOME" aria-label="Username" aria-describedby="basic-addon1">
 <span class="input-group-text" id="basic-addon1">
@@ -79,14 +79,14 @@ ENTRE
 </div>
 </form>
 <table class="table table-striped">
-    <caption>lista de curriculos</caption>
+    <caption>lista de currículos</caption>
    <thead>
     <tr>
       <th scope="col">Nome</th>
       <th scope="col">Visualizar</th>
-      <th scope="col">Alterar Curriculo</th>
-      <th scope="col">Deletar Curriculo</th>
-      <th scope="col">Codigo Curriculo</th>
+      <th scope="col">Alterar Currículo</th>
+      <th scope="col">Deletar Currículo</th>
+      <th scope="col">Codigo Currículo</th>
 
     </tr>
    </thead>
@@ -95,7 +95,7 @@ ENTRE
   </tbody>
  </table>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CriaCurriculo" >
-CRIAR NOVO CURRICULO
+CRIAR NOVO CURRÍCULO
 </button>
 
 
@@ -106,7 +106,7 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">CURRICULO DE:  </h5>
+        <h5 class="modal-title" id="exampleModalLabel">CURRÍCULO DE:  </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -134,7 +134,7 @@ CRIAR NOVO CURRICULO
           <br><br>
           <div class="row">
             <div >
-              <h5>Experiencia profissional</h5>
+              <h5>Experiência profissional</h5>
               <div id="experienciaprof"></div>
             </div>
           </div>
@@ -151,7 +151,7 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registrando novo Curriculo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Registrando novo Currículo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -212,7 +212,7 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">CURRICULO DE:  </h5>
+        <h5 class="modal-title" id="exampleModalLabel">CURRÍCULO DE:  </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -221,7 +221,7 @@ CRIAR NOVO CURRICULO
       </button>
       <br><br>
       <button id="btn-NVE"type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NovoExper" >
-      Nova experiencia profissional
+      Nova experiência profissional
       </button>
       <br><br>
       <button id="btn-MDIM" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#MDIMModal" >
@@ -237,7 +237,7 @@ CRIAR NOVO CURRICULO
       </button>
       <br><br>
       <button id="btn-MDE" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EXPERIEN_MENU" >
-      Alterar experiencia profissional
+      Alterar experiência profissional
       </button>
     </div>
   </div>
@@ -295,7 +295,7 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">NOVA EXPERIENCIA</h5>
+        <h5 class="modal-title" id="exampleModalLabel">NOVA EXPERIÊNCIA</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -376,7 +376,7 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registrando novo Curriculo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Registrando novo Currículo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -492,7 +492,7 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">EXPERIENCIAS DE:  </h5>
+        <h5 class="modal-title" id="exampleModalLabel">EXPERIÊNCIAS DE:  </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" >
@@ -517,11 +517,11 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Deletando Experiencia</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Deletando Experiência</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h3>Tem certeza que deseja deletar a experiencia?</h3>
+        <h3>Tem certeza que deseja deletar a experiência?</h3>
         <form id="DeletaExpForm" method="POST">
             <input type="hidden" name="model-cod-u" class="form-control" id="model-cod-Exp">
       </div>
@@ -544,11 +544,11 @@ CRIAR NOVO CURRICULO
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Deletando Curriculo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Deletando Currículo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h3 id="currInfo">Tem certeza que deseja deletar o curriculo?</h3>
+        <h3 id="currInfo">Tem certeza que deseja deletar o currículo?</h3>
         <form id="DeletaCurriculoForm" method="POST">
             <input type="hidden" name="model-cod-u" class="form-control" id="model-cod-DelCurr">
       </div>
@@ -590,7 +590,7 @@ async function mostraCurric(){
   const modaltelef = CurriculoModal.querySelector('.tell');
   const modalemail = CurriculoModal.querySelector('.email');
 
-  modalTitle.textContent = `Curriculo de: ${nome}`;
+  modalTitle.textContent = `Currículo de: ${nome}`;
   modalnomec.textContent = `${nome}`;
   modaldatanasc.textContent = `data de nascimento: ${data_nasc}`;
   modalendereco.textContent = `${endereco} cidade ${cidade}`;
@@ -676,7 +676,7 @@ async function NVECurric(){
   const modalTitle = CurriculoNVEModal.querySelector('.modal-title');
   const modalCod = CurriculoNVEModal.querySelector('#model-codcurriculo-NVE')
   var result = await BuscaRapida(cod_curriculo,'pessoa')
-  modalTitle.textContent = 'NOVA EXPERIENCIA DE: '+result[0][1];
+  modalTitle.textContent = 'NOVA EXPERIÊNCIA DE: '+result[0][1];
   modalCod.value = cod_curriculo;
 };
 
@@ -786,7 +786,7 @@ async function MenuConhecim(){
   const cod_curriculo = button.getAttribute('CODCURR');
   const modalTitle = CurriculoTdExperi.querySelector('.modal-title');
   var pessoa = await BuscaRapida(cod_curriculo,'pessoa')
-  modalTitle.textContent = 'Experiencias de: '+pessoa[0][1];
+  modalTitle.textContent = 'Experiências de: '+pessoa[0][1];
   var experien = await BuscaRapida(cod_curriculo,'experiencia')
   if (experien != null) {
   result = experien
@@ -824,8 +824,8 @@ async function DelCurriculo(){
   const modalTitle = CurriculoDelCurriculo.querySelector('.modal-title');
   const modalInfo = CurriculoDelCurriculo.querySelector('#currInfo');
   var pessoa = await BuscaRapida(cod,'pessoa')
-  modalTitle.textContent = 'Deletando curriculo de: '+pessoa[0][1];
-  modalInfo.textContent = 'Tem certeza que deseja deletar o curriculo de: '+pessoa[0][1]
+  modalTitle.textContent = 'Deletando currículo de: '+pessoa[0][1];
+  modalInfo.textContent = 'Tem certeza que deseja deletar o currículo de: '+pessoa[0][1]
   modalCod.value = cod;
 }
 
