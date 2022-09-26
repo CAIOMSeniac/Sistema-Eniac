@@ -874,7 +874,7 @@ function Consulta(){
   }).done(function(result) {
     $('#comecConsul').empty();
     for(var i = 0; i < result.length; i++){
-      $('#comecConsul').prepend('<tr><td>'+  result[i][1] +'</td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Curriculo" NOME="'+  result[i][1] +'" DATANASC="'+  result[i][9] +'" ENDERECO="'+  result[i][3] +'" CIDADE="'+  result[i][2] +'" EMAIL="'+  result[i][5] +'" TELL="'+  result[i][4] +'" CODCURR ="'+  result[i][0] +'">Mostrar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AtualizaCurriculo" CODCURR ="'+  result[i][0] +'" NOME="'+  result[i][1] +'">Atualizar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeletaCurr" CODCURR ="'+  result[i][0] +'">Deletar curriculo</button></td><td>'+  result[i][0] +'</td></tr>');
+      $('#comecConsul').prepend('<tr><td>'+  result[i][1] +'</td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Curriculo" NOME="'+  result[i][1] +'" DATANASC="'+  result[i][9] +'" ENDERECO="'+  result[i][3] +'" CIDADE="'+  result[i][2] +'" EMAIL="'+  result[i][5] +'" TELL="'+  result[i][4] +'" CODCURR ="'+  result[i][0] +'">Mostrar currículo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AtualizaCurriculo" CODCURR ="'+  result[i][0] +'" NOME="'+  result[i][1] +'">Atualizar currículo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeletaCurr" CODCURR ="'+  result[i][0] +'">Deletar currículo</button></td><td>'+  result[i][0] +'</td></tr>');
     }
   })
 }
