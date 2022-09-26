@@ -195,11 +195,11 @@ CRIAR NOVO CURRICULO
       Alterar Dados pessoais
       </button>
       <br><br>
-      <button id="btn-MDC" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#" >
+      <button id="btn-MDC" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CONHECIMENTOS_MENU" >
       Alterar conhecimento/escolaridade
       </button>
       <br><br>
-      <button id="btn-MDE" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#" >
+      <button id="btn-MDE" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#EXPERIEN_MENU" >
       Alterar experiencia profissional
       </button>
     </div>
@@ -393,6 +393,135 @@ CRIAR NOVO CURRICULO
   </div>
 </div>
 
+
+
+
+
+
+
+<!-----------TODOS OS CONHECIMENTOS------------>
+<div class="modal fade" id="CONHECIMENTOS_MENU" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CONHECIMENTOS DE:  </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+      <table class="table table-striped">
+    <caption>lista de conhecimentos</caption>
+   <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">DELETAR</th>
+
+    </tr>
+   </thead>
+   <tbody id="corpo-CONMEN">
+   </tbody>
+  </table>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="modal fade" id="DeletaConhe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deletando Conhecimento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3>Tem certeza que deseja deletar o conhecimento?</h3>
+        <form id="DeletaConheForm" method="POST">
+            <input type="hidden" name="model-cod-u" class="form-control" id="model-cod-Conhe">
+      </div>
+      <div class="modal-footer">
+        <button  id="DEL" name='DEL' type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-----------TODAS AS EXPERIENCIAS------------>
+<div class="modal fade" id="EXPERIEN_MENU" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">EXPERIENCIAS DE:  </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+      <table class="table table-striped">
+    <caption>lista de experiencias</caption>
+   <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">razão social</th>
+      <th scope="col">DELETAR</th>
+
+    </tr>
+   </thead>
+   <tbody id="corpo-EXPR">
+   </tbody>
+  </table>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="modal fade" id="DeletaExp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deletando Experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Tem certeza que deseja deletar a experiencia?</h3>
+        <form id="DeletaExpForm" method="POST">
+            <input type="hidden" name="model-cod-u" class="form-control" id="model-cod-Exp">
+      </div>
+      <div class="modal-footer">
+        <button  id="DEL" name='DEL' type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-----------APAGA CURRICULO------------>
+<div class="modal fade" id="DeletaCurr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deletando Curriculo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 id="currInfo">Tem certeza que deseja deletar o curriculo?</h3>
+        <form id="DeletaCurriculoForm" method="POST">
+            <input type="hidden" name="model-cod-u" class="form-control" id="model-cod-DelCurr">
+      </div>
+      <div class="modal-footer">
+        <button  id="DEL" name='DEL' type="submit" class="btn btn-primary" data-bs-dismiss="modal">confirmar</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
@@ -558,6 +687,7 @@ async function AtuaCurricMDIP(){
   const cidade = AttINFPCurrModal.querySelector('#model-CIDADE-MDIP')
   var result = await BuscaRapida(cod_curriculo,'pessoa')
   modalCod.value = cod_curriculo;
+  modalTitle.textContent = 'Atualizando informações pessoais de: '+result[0][1];
   nome.value = result[0][1]
   cidade.value = result[0][2]
   endereco.value = result[0][3]
@@ -568,6 +698,102 @@ async function AtuaCurricMDIP(){
   uf.value = result[0][8]
   dt_nasc.value = result[0][9]
 }
+
+
+
+
+
+
+const CurriculoTdConhec = document.getElementById('CONHECIMENTOS_MENU')
+CurriculoTdConhec.addEventListener('show.bs.modal',event => {
+  MenuConhecim()
+});
+async function MenuConhecim(){
+  const button = event.relatedTarget;
+  const cod_curriculo = button.getAttribute('CODCURR');
+  const modalTitle = CurriculoTdConhec.querySelector('.modal-title');
+  var pessoa = await BuscaRapida(cod_curriculo,'pessoa')
+  modalTitle.textContent = 'Conhecimentos de: '+pessoa[0][1];
+  var formacao = await BuscaRapida(cod_curriculo,'conhecimento')
+  if (formacao != null) {
+  result = formacao
+  $('#corpo-CONMEN').empty();
+    for(var i = 0; i < result.length; i++){
+      $('#corpo-CONMEN').prepend('<tr><td>'+  result[i][0] +'</td><td>'+  result[i][2] +'</td><td><button data-bs-toggle="modal" data-bs-target="#DeletaConhe" type="button" class="dropdown-item" IDENTIFICA="'+result[i][0]+'">APAGAR</button></td></tr>');
+    }
+  }
+}
+const CurriculoDelConhec = document.getElementById('DeletaConhe')
+CurriculoDelConhec.addEventListener('show.bs.modal',event => {
+  DelConhecim()
+});
+async function DelConhecim(){
+  const button = event.relatedTarget;
+  const cod = button.getAttribute('IDENTIFICA');
+  const modalCod = CurriculoDelConhec.querySelector('#model-cod-Conhe')
+  modalCod.value = cod;
+}
+
+
+
+
+
+
+
+const CurriculoTdExperi = document.getElementById('EXPERIEN_MENU')
+CurriculoTdExperi.addEventListener('show.bs.modal',event => {
+  MenuConhecim()
+});
+async function MenuConhecim(){
+  const button = event.relatedTarget;
+  const cod_curriculo = button.getAttribute('CODCURR');
+  const modalTitle = CurriculoTdExperi.querySelector('.modal-title');
+  var pessoa = await BuscaRapida(cod_curriculo,'pessoa')
+  modalTitle.textContent = 'Experiencias de: '+pessoa[0][1];
+  var experien = await BuscaRapida(cod_curriculo,'experiencia')
+  if (experien != null) {
+  result = experien
+  $('#corpo-EXPR').empty();
+    for(var i = 0; i < result.length; i++){
+      $('#corpo-EXPR').prepend('<tr><td>'+  result[i][0] +'</td><td>'+  result[i][2] +'</td><td><button data-bs-toggle="modal" data-bs-target="#DeletaExp" type="button" class="dropdown-item" IDENTIFICA="'+result[i][0]+'">APAGAR</button></td></tr>');
+    }
+  }
+}
+
+const CurriculoDelExp = document.getElementById('DeletaExp')
+CurriculoDelExp.addEventListener('show.bs.modal',event => {
+  DelExp()
+});
+async function DelExp(){
+  const button = event.relatedTarget;
+  const cod = button.getAttribute('IDENTIFICA');
+  const modalCod = CurriculoDelExp.querySelector('#model-cod-Exp')
+  modalCod.value = cod;
+}
+
+
+
+
+
+
+const CurriculoDelCurriculo = document.getElementById('DeletaCurr')
+CurriculoDelCurriculo.addEventListener('show.bs.modal',event => {
+  DelCurriculo()
+});
+async function DelCurriculo(){
+  const button = event.relatedTarget;
+  const cod = button.getAttribute('CODCURR');
+  const modalCod = CurriculoDelCurriculo.querySelector('#model-cod-DelCurr')
+  const modalTitle = CurriculoDelCurriculo.querySelector('.modal-title');
+  const modalInfo = CurriculoDelCurriculo.querySelector('#currInfo');
+  var pessoa = await BuscaRapida(cod,'pessoa')
+  modalTitle.textContent = 'Deletando curriculo de: '+pessoa[0][1];
+  modalInfo.textContent = 'Tem certeza que deseja deletar o curriculo de: '+pessoa[0][1]
+  modalCod.value = cod;
+}
+
+
+
 
 
 /// AJAX PUXANDO INFORMAÇÕES
@@ -611,7 +837,7 @@ function Consulta(){
   }).done(function(result) {
     $('#comecConsul').empty();
     for(var i = 0; i < result.length; i++){
-      $('#comecConsul').prepend('<tr><td>'+  result[i][1] +'</td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Curriculo" NOME="'+  result[i][1] +'" DATANASC="'+  result[i][9] +'" ENDERECO="'+  result[i][3] +'" CIDADE="'+  result[i][2] +'" EMAIL="'+  result[i][5] +'" TELL="'+  result[i][4] +'" CODCURR ="'+  result[i][0] +'">Mostrar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AtualizaCurriculo" CODCURR ="'+  result[i][0] +'" NOME="'+  result[i][1] +'">Atualizar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Curriculo" CODCURR ="'+  result[i][0] +'">Deletar curriculo</button></td><td>'+  result[i][0] +'</td></tr>');
+      $('#comecConsul').prepend('<tr><td>'+  result[i][1] +'</td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Curriculo" NOME="'+  result[i][1] +'" DATANASC="'+  result[i][9] +'" ENDERECO="'+  result[i][3] +'" CIDADE="'+  result[i][2] +'" EMAIL="'+  result[i][5] +'" TELL="'+  result[i][4] +'" CODCURR ="'+  result[i][0] +'">Mostrar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#AtualizaCurriculo" CODCURR ="'+  result[i][0] +'" NOME="'+  result[i][1] +'">Atualizar curriculo</button></td><td><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#DeletaCurr" CODCURR ="'+  result[i][0] +'">Deletar curriculo</button></td><td>'+  result[i][0] +'</td></tr>');
     }
   })
 }
@@ -784,6 +1010,54 @@ $('#AttINFPCurrForm').submit(function(e){
       CIDADE: cidade,
       cod_curriculo: cd_c
     },
+    dataType: 'json'
+  }).done(function(b) {
+    Consulta()
+  })
+
+});
+
+
+
+$('#DeletaConheForm').submit(function(e){
+  e.preventDefault()
+  var Id = $('#model-cod-Conhe').val();
+  console.log(Id)
+  $.ajax({
+    url: 'curriculoConDel.php',
+    method: 'POST',
+    data:{ident: Id},
+    dataType: 'json'
+  }).done(function(b) {
+    Consulta()
+  })
+
+});
+$('#DeletaExpForm').submit(function(e){
+  e.preventDefault()
+  var Id = $('#model-cod-Exp').val();
+  $.ajax({
+    url: 'curriculoExpDel.php',
+    method: 'POST',
+    data:{ident: Id},
+    dataType: 'json'
+  }).done(function(b) {
+    Consulta()
+  })
+
+});
+
+
+
+
+
+$('#DeletaCurriculoForm').submit(function(e){
+  e.preventDefault()
+  var Id = $('#model-cod-DelCurr').val();
+  $.ajax({
+    url: 'curriculoDel.php',
+    method: 'POST',
+    data:{ident: Id},
     dataType: 'json'
   }).done(function(b) {
     Consulta()
