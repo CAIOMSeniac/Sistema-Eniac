@@ -41,43 +41,38 @@
     <title>Projeto</title>
 </head>
 <body>
-    <section class="container">
-       <form action="index.php" method="POST">
+<style type="text/css">
+.container{
+    text-align: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.342);
+    margin-top: 40px;
+    box-shadow: 0 0 10px #0000003a,0 0 20px #0000003a,0 0 30px #0000003a,0 0 50px #0000003a;
+    padding: 40px 40px;
+    border: 1px solid rgba(255, 225, 255, 0.2);
+    border-radius: 20px;
+}
+</style>
+<section class="container">
+<img src="https://www.eniac.com.br/hs-fs/hubfs/Logos-Eniac-2019-1.png?width=1150&name=Logos-Eniac-2019-1.png" class='figure-img img-fluid rounded' width="200px">
+<br><br><br><br>
+<form action="index.php" method="POST">
         <h1>Login</h1>
+        <br><br><br>
         <div class="input-group">
         <div class="input-group-text" id="nomerequerido">requirido</div>
         <input name = 'nome' type="text" class="form-control" placeholder="nome ou email" id="usuarionome" >
         </div>
-        <br>
+        <br><br>
         <div class="input-group">
         <div class="input-group-text" id="senharequeriada">requirido</div>
         <input name= 'senha' type="text"  class="form-control" placeholder="senha" id="usuariosenha">
         </div>
-        <br>
+        <br><br>
         <input name="confirmar" type="submit" class="btn btn-primary"  value="validar" id="confirmar">
         <br>
-        </form>
-    </section>
-    <table class="table table-striped">
-    <caption>lista de usuarios</caption>
-  <thead>
-    <tr>
-      <th scope="col">nome</th>
-      <th scope="col">senha</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    $res = mysqli_query($conn, "select * from  `usuarios`");
-    while($linha=mysqli_fetch_assoc($res)){
-        echo "<tr>";
-        echo "<td>".$linha["nome"]."</td>";
-        echo "<td>".$linha["senha"]."</td>";
-        echo "</tr>";
-    }
-    ?>
-     </tbody>
-</table>
+</form>
+</section>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
