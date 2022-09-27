@@ -86,7 +86,7 @@ ENTRE
       <th scope="col">Visualizar</th>
       <th scope="col">Alterar Currículo</th>
       <th scope="col">Deletar Currículo</th>
-      <th scope="col">Codigo Currículo</th>
+      <th scope="col">Código Currículo</th>
 
     </tr>
    </thead>
@@ -891,7 +891,6 @@ function BuscaRapida(id_curriculo,Tabela){ //  'conhecimento'     'experiencia' 
     },
     dataType: 'json'
   }).done(function(result) {
-    console.log(result);
     resolve(result);
   })
 })

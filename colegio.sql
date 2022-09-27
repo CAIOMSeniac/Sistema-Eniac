@@ -1,23 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.1.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 13-Set-2022 às 13:44
--- Versão do servidor: 10.4.19-MariaDB
--- versão do PHP: 7.3.28
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
 -- Banco de dados: `colegio`
 --
 CREATE DATABASE `colegio`;
@@ -39,10 +20,6 @@ CREATE TABLE `tabela_imagens` (
 );
 
 --
--- Extraindo dados da tabela `tabela_imagens`
---
-
---
 -- Estrutura da tabela `usuarios`
 --
 
@@ -55,7 +32,7 @@ CREATE TABLE `usuarios` (
   `ativo` tinyint(1) NOT NULL);
 
 --
--- Extraindo dados da tabela `usuarios`
+-- inserindo dados na tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`codigo`, `nome`, `email`, `senha`, `funcao`, `ativo`) VALUES
@@ -66,7 +43,9 @@ INSERT INTO `usuarios` (`codigo`, `nome`, `email`, `senha`, `funcao`, `ativo`) V
 (6, 'teste', 'teste@teste', '123456', 'Adm', 0);
 
 
-
+--
+-- Estrutura da tabela `curriculos_pessoa`
+--
 CREATE TABLE `curriculos_pessoa`(
     `cod_curriculo` int PRIMARY KEY AUTO_INCREMENT,
     `nome_Completo` varchar(150) NOT NULL,
@@ -79,6 +58,10 @@ CREATE TABLE `curriculos_pessoa`(
     `uf` varchar(50) NOT NULL,
     `data_nasc` DATE NOT NULL);
 
+
+--
+-- Estrutura da tabela `curriculos_empresas`
+--
 CREATE TABLE `curriculos_empresas`(
     `codigo` int PRIMARY KEY AUTO_INCREMENT,
     `cod_curriculo` int NOT NULL,
@@ -87,6 +70,10 @@ CREATE TABLE `curriculos_empresas`(
     `periodo_fim` DATE NOT NULL,
     `descricao_empresa` TEXT NOT NULL);
 
+
+--
+-- Estrutura da tabela `curriculos_conhecimento`
+--
 CREATE TABLE `curriculos_conhecimento`(
     `codigo` int PRIMARY KEY AUTO_INCREMENT,
     `cod_curriculo` int NOT NULL,
